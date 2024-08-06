@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:html_unescape/html_unescape.dart' as all;
+import 'package:html_unescape/html_unescape_all.dart' as all;
 import 'package:html_unescape/html_unescape_small.dart' as small;
 
 void main() {
@@ -8,7 +8,7 @@ void main() {
 }
 
 class AllEntities extends Benchmark {
-  final codec = all.HtmlUnescape();
+  final codec = all.HtmlUnescapeAll();
 
   @override
   int run() {
@@ -19,7 +19,7 @@ class AllEntities extends Benchmark {
 }
 
 class BasicEntities extends Benchmark {
-  final codec = small.HtmlUnescape();
+  final codec = small.HtmlUnescapeSmall();
 
   @override
   int run() {

@@ -5,21 +5,21 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:html_unescape/html_unescape.dart' as lib_full;
+import 'package:html_unescape/html_unescape_all.dart' as lib_full;
 import 'package:html_unescape/html_unescape_small.dart' as lib_small;
 import 'package:html_unescape/src/base.dart' show HtmlUnescapeBase;
 import 'package:test/test.dart';
 
 void main() {
   group('Full', () {
-    runTests(() => lib_full.HtmlUnescape());
+    runTests(() => lib_full.HtmlUnescapeAll());
   });
   group('Small', () {
-    runTests(() => lib_small.HtmlUnescape());
+    runTests(() => lib_small.HtmlUnescapeSmall());
   });
 
   test('converts in chunks', () async {
-    var unescape = lib_full.HtmlUnescape();
+    var unescape = lib_full.HtmlUnescapeAll();
 
     var stream = Stream.fromIterable(
         ['This is &quot;awesome&qu'.codeUnits, 'ot;.'.codeUnits]);
@@ -63,7 +63,7 @@ void runTests(ConverterFactory converterFactory) {
           'Look <a>here</a&nonexistent;');
     });
 
-    if (unescape is lib_full.HtmlUnescape) {
+    if (unescape is lib_full.HtmlUnescapeAll) {
       test('&CounterClockwiseContourIntegral;', () {
         expect(
             unescape.convert('Hi &CounterClockwiseContourIntegral;'), 'Hi ∳');

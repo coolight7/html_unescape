@@ -2,10 +2,10 @@
 // code is governed by a BSD-style license that can be found in the LICENSE
 // file.
 
-import 'package:html_unescape/html_unescape.dart';
+import 'package:html_unescape/html_unescape_all.dart';
 
 void main() {
-  var unescape = HtmlUnescape();
+  var unescape = HtmlUnescapeAll();
   print(unescape.convert('&lt;strong&#62;This &quot;escaped&quot; string '
       'will be printed normally.</strong>'));
 }

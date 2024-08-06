@@ -5,7 +5,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:html_unescape/html_unescape.dart';
+import 'package:html_unescape/html_unescape_all.dart';
 
 Future<void> main() async {
   // Try something like
@@ -13,7 +13,7 @@ Future<void> main() async {
   //    $ dart example/posix_converter.dart < some_file.html
   await stdin
       .transform(Utf8Decoder())
-      .transform(HtmlUnescape())
+      .transform(HtmlUnescapeAll())
       .transform(Utf8Encoder())
       .pipe(stdout);
 }

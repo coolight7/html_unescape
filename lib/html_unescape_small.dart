@@ -16,7 +16,7 @@ import 'src/data/named_chars_basic.dart' as data;
 /// most often encountered in regular documents. Consider using the bigger
 /// version from `package:html_unescape/html_unescape.dart` if you need
 /// the converter to be as comprehensive as possible.
-class HtmlUnescape extends HtmlUnescapeBase {
+class HtmlUnescapeSmall extends HtmlUnescapeBase {
   @override
   final int maxKeyLength = data.maxKeyLength;
 
