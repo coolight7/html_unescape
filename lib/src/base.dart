@@ -52,7 +52,7 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
       buf.write(data.substring(offset, nextAmp));
       offset = nextAmp;
 
-      var chunk =
+      final chunk =
           data.substring(offset, min(data.length, offset + _chunkLength));
 
       // Try &#123; and &#xff;
@@ -60,8 +60,8 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
           chunk.codeUnitAt(1) == _hashCodeUnit) {
         final nextSemicolon = chunk.indexOf(';');
         if (nextSemicolon != -1) {
-          var hex = chunk.codeUnitAt(2) == _xCodeUnit;
-          var str = chunk.substring(hex ? 3 : 2, nextSemicolon);
+          final hex = chunk.codeUnitAt(2) == _xCodeUnit;
+          final str = chunk.substring(hex ? 3 : 2, nextSemicolon);
           final ord = int.tryParse(str, radix: hex ? 16 : 10) ?? -1;
           if (ord != -1) {
             buf.write(String.fromCharCode(ord));
@@ -74,9 +74,9 @@ abstract class HtmlUnescapeBase extends Converter<String, String> {
       // Try &nbsp;
       var replaced = false;
       for (var i = 0; i < keys.length; i++) {
-        var key = keys[i];
+        final key = keys[i];
         if (chunk.startsWith(key)) {
-          var replacement = values[i];
+          final replacement = values[i];
           buf.write(replacement);
           offset += key.length;
           replaced = true;
@@ -150,9 +150,9 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
     }
 
     while (nextAmp + _unescape.maxKeyLength <= end) {
-      var lastAmp = chunk.lastIndexOf('&', end);
+      final lastAmp = chunk.lastIndexOf('&', end);
       final subEnd = lastAmp != -1 ? lastAmp : nextAmp + _unescape.maxKeyLength;
-      var result = _unescape.convert(chunk.substring(start, subEnd));
+      final result = _unescape.convert(chunk.substring(start, subEnd));
       _sink.add(result);
       start = subEnd;
       nextAmp = chunk.indexOf('&', start);
@@ -164,13 +164,13 @@ class _HtmlUnescapeSink extends StringConversionSinkBase {
     }
 
     if (nextAmp + _unescape.maxKeyLength > end && isLast) {
-      var result = _unescape.convert(chunk.substring(start, end));
+      final result = _unescape.convert(chunk.substring(start, end));
       _sink.add(result);
       _carry = null;
       return;
     }
 
-    var nextCarry = chunk.substring(start, end);
+    final nextCarry = chunk.substring(start, end);
     if (_carry == null) {
       _carry = nextCarry;
     } else {
